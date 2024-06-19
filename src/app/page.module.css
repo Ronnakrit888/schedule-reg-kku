@@ -1,14 +1,14 @@
-.timeHeader {
-  width: 150px;
-  height: 50px
-}
+.line {
+  position: absolute;
+  background-color: black;
 
-.subject {
-  width: 75px;
-  height: 75px;
 }
-
 .dayHeader {
-  width: 25px;
-  height: 75px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  text-align: center;
+  padding: 1px;
 }
