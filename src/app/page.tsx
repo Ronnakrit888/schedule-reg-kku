@@ -5,6 +5,7 @@ import { Container, Button, Typography } from "@mui/material";
 import styles from "./page.module.css";
 
 export default function Home() {
+
   const days: string[] = ["MON", "TUE", "WED", "THU", "FRI"];
   const times: string[] = [
     "8",
@@ -22,6 +23,63 @@ export default function Home() {
     "20",
   ];
 
+  const day : string = "MON"
+  const timeStart : number = 9
+  const timeEnd : number = 10.30
+
+  const getDecimalPart = (num : number) : number => {
+    
+    const integerPart = Math.floor(num)
+    const decimalPart = num - integerPart
+    return Math.floor(decimalPart * 100)
+
+  }
+
+  const lengthSubject = (start : number, end : number) : number => {
+
+    const startInteger : number = Math.floor(start)
+    const endInteger : number = Math.floor(end)
+
+    let minutes : number = 0
+
+    if (!Number.isInteger(start) && Number.isInteger(end)) {
+      console.log("Time Start is not Integer")
+      minutes = getDecimalPart(start) - 60
+    }
+
+    if (Number.isInteger(start) && !Number.isInteger(end)) {
+      console.log("Time End is not Integer")
+      minutes = 60 - getDecimalPart(end)
+    }
+
+    if (!Number.isInteger(start) && !Number.isInteger(end)) {
+      console.log("Both is not Integer")
+      minutes = getDecimalPart(end) - getDecimalPart(start)
+    }
+
+    return (endInteger - startInteger) * 2 + (minutes / 30)
+
+  }
+
+
+  const addSubject = () => {
+    const tableArray : number[][] = Array(days.length + 1).fill(null).map((_, index) => new Array(times.length * 2).fill(0))
+    console.log(tableArray)
+
+    const dayIndex = days.indexOf(day)
+    console.log("Day Index : " , dayIndex + 1)
+    console.log("length : ", lengthSubject(timeStart, timeEnd))
+
+    const distanceLeft : number = lengthSubject(parseInt(times[0]), timeStart)
+    console.log("from left :", distanceLeft)
+
+   for (let i = 0; i < lengthSubject(timeStart, timeEnd); i++) {
+    tableArray[dayIndex + 1][distanceLeft + i] = 1
+   }
+    console.log(tableArray)
+
+  }
+  
   return (
     <Container>
       <Container sx={{ maxWidth: "1440px" }}>
@@ -117,6 +175,8 @@ export default function Home() {
           ></span>
         ))}
       </Container>
+      <Button variant="outlined" sx={{ top : '500px'}} onClick={addSubject}>Mock</Button>
     </Container>
+    
   );
 }
