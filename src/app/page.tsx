@@ -98,6 +98,7 @@ export default function Home() {
           marginLeft: "auto",
           marginRight: "auto",
           display: "block",
+          position : 'absolute'
         }}
       >
         <div style={{ paddingTop: "32px", boxSizing: "inherit" }}>
@@ -185,7 +186,14 @@ export default function Home() {
             </div>
           </div>
         </div>
+      <div style={{ display : 'flex', left : '0px'}}>
+        <div style={{display : 'flex', justifyContent : 'space-between', maxWidth : '300px'}}>
+          <Button variant="outlined">Mock</Button>
+          <Button variant="outlined">Subject</Button>
+        </div>
+      </div>
       </Container>
+      
     </div>
   );
 }
