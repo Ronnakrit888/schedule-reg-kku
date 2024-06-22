@@ -28,8 +28,8 @@ export default function Home() {
   ];
 
   const day: string = "MON";
-  const timeStart: number = 8;
-  const timeEnd: number = 10.3;
+  const timeStart: number = 10.30;
+  const timeEnd: number = 12;
 
   const getDecimalPart = (num: number): number => {
     const integerPart = Math.floor(num);
@@ -61,6 +61,30 @@ export default function Home() {
     return (endInteger - startInteger) * 2 + minutes / 30;
   };
 
+  const findNumberInArray = (
+    array: number[][]
+  ): { row: number; column: number; length: number } | null => {
+
+    for (let row = 0; row < array.length; row++) {
+      let firstOneColumn: number = -1;
+      let length: number = 0;
+      for (let col = 0; col < array[row].length; col++) {
+        if (array[row][col] === 1) {
+          if (firstOneColumn === -1) {
+            firstOneColumn = col;
+          }
+          length++;
+        }
+      }
+
+      if (firstOneColumn !== -1) {
+        return { row, column: firstOneColumn, length };
+      }
+    }
+
+    return null;
+  };
+
   const addSubject = () => {
     setClick(false);
     const tableArray: number[][] = Array.from({ length: days.length + 1 }, () =>
@@ -81,10 +105,11 @@ export default function Home() {
     const newTableArray: number[][] = tableArray.map((row) => [...row]);
 
     for (let i = 0; i < lengthSubject(timeStart, timeEnd); i++) {
-      newTableArray[dayIndex + 1][distanceLeft + i] = 1;
+      newTableArray[dayIndex + 1][distanceLeft + i + 1] = 1;
     }
 
     console.log(newTableArray);
+    console.log(findNumberInArray(newTableArray));
   };
 
   return (
@@ -98,7 +123,7 @@ export default function Home() {
           marginLeft: "auto",
           marginRight: "auto",
           display: "block",
-          position : 'absolute'
+          position: "absolute",
         }}
       >
         <div style={{ paddingTop: "32px", boxSizing: "inherit" }}>
@@ -186,14 +211,15 @@ export default function Home() {
             </div>
           </div>
         </div>
-      <div style={{ display : 'flex', left : '0px'}}>
-        <div style={{display : 'flex', justifyContent : 'space-between', maxWidth : '300px'}}>
-          <Button variant="outlined">Mock</Button>
+      </Container>
+      <div style={{ display: "flex" }}>
+        <div>
+          <Button variant="outlined" onClick={addSubject}>
+            Mock
+          </Button>
           <Button variant="outlined">Subject</Button>
         </div>
       </div>
-      </Container>
-      
     </div>
   );
 }
