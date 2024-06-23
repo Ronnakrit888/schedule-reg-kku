@@ -9,6 +9,7 @@ export default function Home() {
   const [isClick, setClick] = useState<boolean>(false);
   const [positionLeft, setPositionLeft] = useState<number>(0);
   const [positionTop, setPositionTop] = useState<number>(0);
+  const [width, setWidth] = useState<number>(0);
 
   const days: string[] = ["MON", "TUE", "WED", "THU", "FRI"];
   const times: string[] = [
@@ -28,8 +29,8 @@ export default function Home() {
   ];
 
   const day: string = "MON";
-  const timeStart: number = 10.30;
-  const timeEnd: number = 12;
+  const timeStart: number = 9;
+  const timeEnd: number = 10.3;
 
   const getDecimalPart = (num: number): number => {
     const integerPart = Math.floor(num);
@@ -64,7 +65,6 @@ export default function Home() {
   const findNumberInArray = (
     array: number[][]
   ): { row: number; column: number; length: number } | null => {
-
     for (let row = 0; row < array.length; row++) {
       let firstOneColumn: number = -1;
       let length: number = 0;
@@ -85,7 +85,7 @@ export default function Home() {
     return null;
   };
 
-  const addSubject = () => {
+  const createMatrixWithSubject = (): { array: number[][] } => {
     setClick(false);
     const tableArray: number[][] = Array.from({ length: days.length + 1 }, () =>
       Array(times.length * 2).fill(0)
@@ -94,12 +94,7 @@ export default function Home() {
     console.log(tableArray);
 
     const dayIndex = days.indexOf(day);
-    setPositionTop(dayIndex + 1);
-    console.log("Day Index : ", dayIndex + 1);
-    console.log("length : ", lengthSubject(timeStart, timeEnd));
-
     const distanceLeft: number = lengthSubject(parseInt(times[0]), timeStart);
-    setPositionLeft(distanceLeft);
     console.log("from left :", distanceLeft);
 
     const newTableArray: number[][] = tableArray.map((row) => [...row]);
@@ -109,7 +104,20 @@ export default function Home() {
     }
 
     console.log(newTableArray);
-    console.log(findNumberInArray(newTableArray));
+    return { array: newTableArray };
+  };
+
+  const addSubjectToTable = () => {
+    setClick(true)
+    const matrix = createMatrixWithSubject().array;
+    const numberFound = findNumberInArray(matrix)
+
+    if (numberFound)  {
+      console.log("Found Number 1")
+      setPositionLeft(numberFound.column)
+      setPositionTop(numberFound.row)
+      setWidth(numberFound.length)
+    }
   };
 
   return (
@@ -211,13 +219,13 @@ export default function Home() {
             </div>
           </div>
         </div>
+        { isClick && (
+          <BoxSubject length={width} row={positionTop} column={positionLeft}/>
+        )}
       </Container>
       <div style={{ display: "flex" }}>
         <div>
-          <Button variant="outlined" onClick={addSubject}>
-            Mock
-          </Button>
-          <Button variant="outlined">Subject</Button>
+          <Button variant="outlined" onClick={addSubjectToTable}>Subject</Button>
         </div>
       </div>
     </div>

@@ -1,23 +1,22 @@
 import React from 'react'
-import { Box } from '@mui/material'
 
 interface BoxProps {
-  fromLeft : number,
-  fromTop : number,
+  row : number,
+  column : number,
   length : number
 
 }
 
-const BoxSubject : React.FC<BoxProps>= ({fromLeft, fromTop, length}) => {
+const BoxSubject : React.FC<BoxProps>= ({row, column, length}) => {
 
 
   return (
     <div
       style={{
-        top: `${61 + ((fromTop - 1) * 80)}px`,
-        left: `${102 + (fromLeft * 50)}px`,
+        top: `${40 + ((row - 1) * 80)}px`,
+        left: `${70 + ((column - 1) * 90)}px`,
         width: `${50 * length}px`,
-        height: "78px",
+        height: "70px",
         backgroundColor: "rgb(75, 112, 245)",
         zIndex: 10,
         position: "absolute",
