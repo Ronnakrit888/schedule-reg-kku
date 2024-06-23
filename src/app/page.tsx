@@ -216,7 +216,10 @@ export default function Home() {
                     }}
                   ></span>
                 ))}
-                <BoxSubject length={width} row={positionTop} column={positionLeft}/>
+                <BoxSubject length={width} row={positionTop} column={positionLeft} color="rgb(248, 196, 113)" colorBorder="rgb(243, 156, 18)"/>
+                <BoxSubject length={width} row={positionTop} column={positionLeft * 2} color="rgb(236, 112, 99)" colorBorder="rgb(203, 67, 53)"/>
+                <BoxSubject length={2} row={positionTop} column={1} color="rgb(236, 112, 99)" colorBorder="rgb(203, 67, 53)"/>
+                <BoxSubject length={2} row={positionTop + 1} column={1} color="rgb(187, 143, 206)" colorBorder="rgb(125, 60, 152)"/>
               </div>
             </div>
           </div>

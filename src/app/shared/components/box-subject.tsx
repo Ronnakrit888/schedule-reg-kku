@@ -3,11 +3,13 @@ import React from 'react'
 interface BoxProps {
   row : number,
   column : number,
-  length : number
+  length : number,
+  color : string,
+  colorBorder : string
 
 }
 
-const BoxSubject : React.FC<BoxProps>= ({row, column, length}) => {
+const BoxSubject : React.FC<BoxProps>= ({row, column, length, color, colorBorder}) => {
 
 
   return (
@@ -15,13 +17,13 @@ const BoxSubject : React.FC<BoxProps>= ({row, column, length}) => {
       style={{
         top: `${40 + ((row - 1) * 80)}px`,
         left: `${70 + ((column - 1) * 45)}px`,
-        width: `${45 * length}px`,
-        height: "78px",
-        backgroundColor: "rgb(75, 112, 245)",
+        width: length % 2 === 0 ? `${43 * length}px` : `${(44 * length) - 1.5}px`,
+        height: "76px",
+        backgroundColor: color,
         zIndex: 10,
         position: "absolute",
-        borderRadius : '3px',
-        border : '1px solid rgb(76, 59, 207)'
+        borderRadius : '6px',
+        border : `2px solid ${colorBorder}`
       }}
     ></div>
   )
