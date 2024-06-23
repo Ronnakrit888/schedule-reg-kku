@@ -114,6 +114,7 @@ export default function Home() {
 
     if (numberFound)  {
       console.log("Found Number 1")
+      console.log(`Position Left: ${numberFound.column}, Position Top: ${numberFound.row}, Width: ${numberFound.length}`);
       setPositionLeft(numberFound.column)
       setPositionTop(numberFound.row)
       setWidth(numberFound.length)
@@ -215,13 +216,11 @@ export default function Home() {
                     }}
                   ></span>
                 ))}
+                <BoxSubject length={width} row={positionTop} column={positionLeft}/>
               </div>
             </div>
           </div>
         </div>
-        { isClick && (
-          <BoxSubject length={width} row={positionTop} column={positionLeft}/>
-        )}
       </Container>
       <div style={{ display: "flex" }}>
         <div>

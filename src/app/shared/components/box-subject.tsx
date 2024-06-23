@@ -14,9 +14,9 @@ const BoxSubject : React.FC<BoxProps>= ({row, column, length}) => {
     <div
       style={{
         top: `${40 + ((row - 1) * 80)}px`,
-        left: `${70 + ((column - 1) * 90)}px`,
-        width: `${50 * length}px`,
-        height: "70px",
+        left: `${70 + ((column - 1) * 45)}px`,
+        width: `${45 * length}px`,
+        height: "78px",
         backgroundColor: "rgb(75, 112, 245)",
         zIndex: 10,
         position: "absolute",
